@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "gearhead-new"
+version = "0.1.0"
+description = ""
+authors = ["João Victor Inocêncio Macedo de Aguiar <macdjoao@gmail.com>"]
+readme = "README.md"
+packages = [{include = "gearhead_new"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
