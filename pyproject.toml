@@ -12,6 +12,7 @@ flask = "^2.3.2"
 dynaconf = "^3.1.12"
 flask-sqlalchemy = "^3.0.3"
 flask-migrate = "^4.0.4"
+flask-admin = "^1.6.1"
 
 
 [build-system]
