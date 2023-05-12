@@ -34,4 +34,17 @@ class User(db.Model):
         return f'\nemail: {self.email}\nfirst_name: {self.first_name}\nlast_name: {self.last_name}\nis_active: {self.is_active}'
 
 
+class Brand(db.Model):
+
+    __tablename__ = 'brands'
+
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    name = sa.Column(sa.String, nullable=False, unique=True)
+    code = sa.Column(sa.String, nullable=False, unique=True)
+
+    def __str__(self):
+        return f'\nname: {self.name}\ncode: {self.code}'
+
+
 admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Brand, db.session))
