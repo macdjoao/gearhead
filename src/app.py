@@ -46,5 +46,20 @@ class Brand(db.Model):
         return f'\nname: {self.name}\ncode: {self.code}'
 
 
+class Vehicle(db.Model):
+
+    __tablename__ = 'vehicles'
+
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    name = sa.Column(sa.String, nullable=False)
+    year = sa.Column(sa.Date, nullable=False)
+    code = sa.Column(sa.String, nullable=False)
+    brand = sa.Column(sa.Integer, sa.ForeignKey('brands.id'))
+
+    def __str__(self):
+        return f'\nname: {self.name}\nyear: {self.year}\ncode: {self.code}\nbrand: {self.brand}'
+
+
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Brand, db.session))
+admin.add_view(ModelView(Vehicle, db.session))
