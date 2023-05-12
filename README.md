@@ -25,3 +25,4 @@ flask db upgrade
 ``
 
 - Adicionar Flask-Admin (5000/admin)
+- Adicionar Flask-RESTful
