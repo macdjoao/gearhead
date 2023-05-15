@@ -2,7 +2,7 @@ from src.ext.database import db
 import sqlalchemy as sa
 
 
-class Vehicle(db.Model):
+class VehicleModel(db.Model):
 
     __tablename__ = 'vehicles'
 

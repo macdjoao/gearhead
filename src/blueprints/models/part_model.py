@@ -2,7 +2,7 @@ from src.ext.database import db
 import sqlalchemy as sa
 
 
-class Part(db.Model):
+class PartModel(db.Model):
 
     __tablename__ = 'parts'
 

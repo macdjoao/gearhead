@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restful import Api
-from .user import UserResource, UserListResource
+from .user_api import UserResource, UserListResource
 
 bp = Blueprint("restapi", __name__, url_prefix="/api/")
 api = Api(bp)

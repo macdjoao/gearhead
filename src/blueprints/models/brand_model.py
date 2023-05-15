@@ -2,7 +2,7 @@ from src.ext.database import db
 import sqlalchemy as sa
 
 
-class Brand(db.Model):
+class BrandModel(db.Model):
 
     __tablename__ = 'brands'
 

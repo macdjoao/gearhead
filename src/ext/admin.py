@@ -1,10 +1,10 @@
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from src.ext.database import db
-from src.blueprints.models.user import User as UserModel
-from src.blueprints.models.brand import Brand as BrandModel
-from src.blueprints.models.vehicle import Vehicle as VehicleModel
-from src.blueprints.models.part import Part as PartModel
+from src.blueprints.models.user_model import UserModel
+from src.blueprints.models.brand_model import BrandModel
+from src.blueprints.models.vehicle_model import VehicleModel
+from src.blueprints.models.part_model import PartModel
 
 admin = Admin(name='Gearhead', template_mode='bootstrap3')
 

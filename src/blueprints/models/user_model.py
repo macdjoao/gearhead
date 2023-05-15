@@ -2,7 +2,7 @@ from src.ext.database import db
 import sqlalchemy as sa
 
 
-class User(db.Model):
+class UserModel(db.Model):
 
     __tablename__ = 'users'
 
