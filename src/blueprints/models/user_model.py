@@ -14,4 +14,4 @@ class UserModel(db.Model):
     is_active = sa.Column(sa.Boolean, default=True)
 
     def __str__(self):
-        return f'\nemail: {self.email}\nfirst_name: {self.first_name}\nlast_name: {self.last_name}\nis_active: {self.is_active}'
+        return f'email: {self.email} ; first_name: {self.first_name} ; last_name: {self.last_name} ; is_active: {self.is_active}'
