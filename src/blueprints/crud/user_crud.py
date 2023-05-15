@@ -4,10 +4,10 @@ from src.ext.database import db
 
 class UserCRUD:
 
-    def create_user(self, email, first_name, last_name, password):
+    def create_user(self, payload):
         try:
-            user = UserModel(email=email, first_name=first_name,
-                             last_name=last_name, password=password)
+            user = UserModel(email=payload['email'], first_name=payload['first_name'],
+                             last_name=payload['last_name'], password=payload['password'])
 
             db.session.add(user)
             db.session.commit()
