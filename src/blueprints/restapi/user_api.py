@@ -10,20 +10,14 @@ crud = UserCRUD()
 class UserResource(Resource):
 
     def post(self):
-        user = schema.load(request.json)
-        return crud.create_user(user)
+        try:
+            user = schema.load(request.json)
+            return crud.create_user(user)
+        except Exception as exc:
+            return f'UserResource[POST] Error: {exc}'
 
     def get(self):
-        return 'get user'
-
-    def patch(self):
-        return 'patch user'
-
-    def delete(self):
-        return 'delete user'
-
-
-class UserListResource(Resource):
-
-    def get(self):
-        return 'get list user'
+        try:
+            return crud.read_users()
+        except Exception as exc:
+            return f'UserResource[GET] Error: {exc}'
