@@ -17,6 +17,15 @@ class UserCRUD:
         except Exception as exc:
             return f'UserCRUD[CREATE_USER] Error: {exc}'
 
+    # Corrigir retorno
+    def read_user(self, id):
+        try:
+            query = UserModel.query.filter(UserModel.id == id)
+            return f'User: {query}'
+        except Exception as exc:
+            return f'UserCRUD[READ_USER] Error: {exc}'
+
+    # Corrigir retorno
     def read_users(self):
         try:
             query = UserModel.query.all()
@@ -25,3 +34,11 @@ class UserCRUD:
             return f'Users: {response}'
         except Exception as exc:
             return f'UserCRUD[READ_USERS] Error: {exc}'
+
+    def delete_user(self, id):
+        try:
+            UserModel.query.filter(UserModel.id == id).delete()
+            db.session.commit()
+            return f'User successfully deleted'
+        except Exception as exc:
+            return f'UserCRUD[DELETE_USER] Error: {exc}'

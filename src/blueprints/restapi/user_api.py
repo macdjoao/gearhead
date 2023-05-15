@@ -21,3 +21,18 @@ class UserResource(Resource):
             return crud.read_users()
         except Exception as exc:
             return f'UserResource[GET] Error: {exc}'
+
+
+class UserResourceList(Resource):
+
+    def get(self, id):
+        try:
+            return crud.read_user(id)
+        except Exception as exc:
+            return f'UserResourceList[GET] Error: {exc}'
+
+    def delete(self, id):
+        try:
+            return crud.delete_user(id)
+        except Exception as exc:
+            return f'UserResourceList[DELETE] Error: {exc}'
