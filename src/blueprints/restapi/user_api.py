@@ -1,10 +1,17 @@
 from flask_restful import Resource
+from flask import request
+from src.blueprints.schemas.user_schema import UserSchema
+from src.blueprints.crud.user_crud import UserCRUD
+
+schema = UserSchema()
+crud = UserCRUD()
 
 
 class UserResource(Resource):
 
     def post(self):
-        return 'post user'
+        user = schema.load(request.json)
+        return crud.create_user(user)
 
     def get(self):
         return 'get user'
