@@ -40,7 +40,6 @@ class UserCRUD:
             print(f'UserCRUD[READ_USERS] Error: {exc}')
             return f'Read Error.'
 
-    # Implementar
     def update_user(self, id: int, payload: dict):
         try:
             user = UserModel.query.get(id)
@@ -64,6 +63,9 @@ class UserCRUD:
 
     def delete_user(self, id: int):
         try:
+            user = UserModel.query.get(id)
+            if user is None:
+                return 'User not found', 404
             UserModel.query.filter_by(id=id).delete()
             db.session.commit()
             return f'User successfully deleted.'
