@@ -17,16 +17,16 @@ class UserCRUD:
             return f'User successfully created: {schema.dump(user)}'
         except Exception as exc:
             print(f'UserCRUD[CREATE_USER] Error: {exc}')
-            return f'Create Error'
+            return f'Create Error.'
 
     def read_user(self, id):
         try:
-            user = UserModel.query.filter_by(id=id).first()
+            user = UserModel.query.get_or_404(id)
             schema = UserSchema()
             return f'User: {schema.dump(user)}'
         except Exception as exc:
             print(f'UserCRUD[READ_USER] Error: {exc}')
-            return f'Read Error'
+            return f'Read Error.'
 
     def read_users(self):
         try:
@@ -35,7 +35,7 @@ class UserCRUD:
             return f'User: {schema.dump(users)}'
         except Exception as exc:
             print(f'UserCRUD[READ_USERS] Error: {exc}')
-            return f'Read Error'
+            return f'Read Error.'
 
     # Implementar
     def update_user(self, id):
@@ -43,7 +43,7 @@ class UserCRUD:
             pass
         except Exception as exc:
             print(f'UserCRUD[UPDATE_USER] Error: {exc}')
-            return f'Update Error'
+            return f'Update Error.'
 
     def delete_user(self, id):
         try:
@@ -52,4 +52,4 @@ class UserCRUD:
             return f'User successfully deleted.'
         except Exception as exc:
             print(f'UserCRUD[DELETE_USER] Error: {exc}')
-            return f'Delete Error'
+            return f'Delete Error.'
