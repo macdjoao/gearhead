@@ -19,8 +19,8 @@ def post_user():
         return 'Create error.'
 
 
-@user.route('/read/<id>')
-def get_user(id):
+@user.route('/read/<int:id>')
+def get_user(id: int):
     try:
         return crud.read_user(id)
     except Exception as exc:
@@ -37,8 +37,8 @@ def get_users():
         return 'Read error.'
 
 
-@user.route('/update/<id>', methods=['PATCH'])
-def patch_user(id):
+@user.route('/update/<int:id>', methods=['PATCH'])
+def patch_user(id: int):
     try:
         payload = request.json
         return crud.update_user(id, payload)
@@ -47,8 +47,8 @@ def patch_user(id):
         return 'Update error.'
 
 
-@user.route('/delete/<id>', methods=['DELETE'])
-def delete_user(id):
+@user.route('/delete/<int:id>', methods=['DELETE'])
+def delete_user(id: int):
     try:
         return crud.delete_user(id)
     except Exception as exc:

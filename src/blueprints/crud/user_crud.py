@@ -6,7 +6,7 @@ from src.blueprints.schemas.user_schema import UserSchema
 
 class UserCRUD:
 
-    def create_user(self, payload):
+    def create_user(self, payload: dict):
         try:
             user = UserModel(email=payload['email'], first_name=payload['first_name'],
                              last_name=payload['last_name'], password=generate_password_hash(payload['password']))
@@ -18,7 +18,7 @@ class UserCRUD:
             print(f'UserCRUD[CREATE_USER] Error: {exc}')
             return f'Create Error.'
 
-    def read_user(self, id):
+    def read_user(self, id: int):
         try:
             user = UserModel.query.get(id)
             if user is None:
@@ -41,7 +41,7 @@ class UserCRUD:
             return f'Read Error.'
 
     # Implementar
-    def update_user(self, id, payload):
+    def update_user(self, id: int, payload: dict):
         try:
             user = UserModel.query.get_or_404(id)
             if 'email' in payload:
@@ -60,7 +60,7 @@ class UserCRUD:
             print(f'UserCRUD[UPDATE_USER] Error: {exc}')
             return f'Update Error.'
 
-    def delete_user(self, id):
+    def delete_user(self, id: int):
         try:
             UserModel.query.filter_by(id=id).delete()
             db.session.commit()
