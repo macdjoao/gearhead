@@ -1,7 +1,6 @@
 from src.blueprints.models.user_model import UserModel
 from src.ext.database import db
 from werkzeug.security import generate_password_hash
-from src.blueprints.schemas.user_schema import UserSchema
 
 
 class UserCRUD:
@@ -15,7 +14,8 @@ class UserCRUD:
             db.session.commit()
             return f'User successfully created: {user}'
         except Exception as exc:
-            return f'UserCRUD[CREATE_USER] Error: {exc}'
+            print(f'UserCRUD[CREATE_USER] Error: {exc}')
+            return f'Create Error'
 
     # Corrigir retorno
     def read_user(self, id):
@@ -23,17 +23,25 @@ class UserCRUD:
             query = UserModel.query.filter(UserModel.id == id)
             return f'User: {query}'
         except Exception as exc:
-            return f'UserCRUD[READ_USER] Error: {exc}'
+            print(f'UserCRUD[READ_USER] Error: {exc}')
+            return f'Read Error'
 
     # Corrigir retorno
     def read_users(self):
         try:
             query = UserModel.query.all()
-            schema = UserSchema(many=True)
-            response = schema.jsonify(query)
-            return f'Users: {response}'
+            return f'Users: {query}'
         except Exception as exc:
-            return f'UserCRUD[READ_USERS] Error: {exc}'
+            print(f'UserCRUD[READ_USERS] Error: {exc}')
+            return f'Read Error'
+
+    # Implementar
+    def update_user(self, id):
+        try:
+            pass
+        except Exception as exc:
+            print(f'UserCRUD[UPDATE_USER] Error: {exc}')
+            return f'Update Error'
 
     def delete_user(self, id):
         try:
@@ -41,4 +49,5 @@ class UserCRUD:
             db.session.commit()
             return f'User successfully deleted'
         except Exception as exc:
-            return f'UserCRUD[DELETE_USER] Error: {exc}'
+            print(f'UserCRUD[DELETE_USER] Error: {exc}')
+            return f'Delete Error'

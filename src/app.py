@@ -4,7 +4,7 @@ from src.ext import database
 from src.ext import migration
 from src.ext import admin
 from src.ext import serializer
-from src.blueprints import restapi
+from src.blueprints.endpoints import api
 
 
 def create_app():
@@ -15,6 +15,6 @@ def create_app():
     serializer.init_app(app)
     migration.init_app(app)
     admin.init_app(app)
-    restapi.init_app(app)
+    api.init_app(app)
 
     return app
