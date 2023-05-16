@@ -17,5 +17,5 @@ class UserModel(db.Model):
     def __str__(self):
         return f'email: {self.email} ; first_name: {self.first_name} ; last_name: {self.last_name} ; is_active: {self.is_active}'
 
-    def verify_password(self, password):
+    def verify_password(self, password: str):
         return check_password_hash(self.password, password)
