@@ -43,7 +43,9 @@ class UserCRUD:
     # Implementar
     def update_user(self, id: int, payload: dict):
         try:
-            user = UserModel.query.get_or_404(id)
+            user = UserModel.query.get(id)
+            if user is None:
+                return 'User not found', 404
             if 'email' in payload:
                 user.email = payload['email']
             if 'first_name' in payload:
