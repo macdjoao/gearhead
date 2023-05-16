@@ -46,7 +46,7 @@ def patch_user(id):
         return 'Update error.'
 
 
-@user.route('/delete/<id>', methods=['PATCH'])
+@user.route('/delete/<id>', methods=['DELETE'])
 def delete_user(id):
     try:
         return crud.delete_user(id)
