@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import request
 from src.blueprints.schemas.user_schema import UserSchema
 from src.blueprints.crud.user_crud import UserCRUD
+from flask_jwt_extended import jwt_required
 
 schema = UserSchema()
 crud = UserCRUD()
@@ -10,6 +11,7 @@ user = Blueprint('user', __name__, url_prefix='/api/v1/user')
 
 
 @user.route('/create', methods=['POST'])
+@jwt_required()
 def post_user():
     try:
         user = schema.load(request.json)
@@ -20,6 +22,7 @@ def post_user():
 
 
 @user.route('/read/<int:id>')
+@jwt_required()
 def get_user(id: int):
     try:
         return crud.read_user(id)
@@ -29,6 +32,7 @@ def get_user(id: int):
 
 
 @user.route('/read')
+@jwt_required()
 def get_users():
     try:
         return crud.read_users()
@@ -38,6 +42,7 @@ def get_users():
 
 
 @user.route('/update/<int:id>', methods=['PATCH'])
+@jwt_required()
 def patch_user(id: int):
     try:
         payload = request.json
@@ -48,6 +53,7 @@ def patch_user(id: int):
 
 
 @user.route('/delete/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(id: int):
     try:
         return crud.delete_user(id)
