@@ -40,7 +40,8 @@ def get_users():
 @user.route('/update/<id>', methods=['PATCH'])
 def patch_user(id):
     try:
-        return crud.update_user(id)
+        payload = request.json
+        return crud.update_user(id, payload)
     except Exception as exc:
         print(f'[patch_user] Error: {exc}')
         return 'Update error.'

@@ -9,8 +9,7 @@ class UserCRUD:
     def create_user(self, payload):
         try:
             user = UserModel(email=payload['email'], first_name=payload['first_name'],
-                             last_name=payload['last_name'], password=payload['password'])
-            user.password = generate_password_hash(user.password)
+                             last_name=payload['last_name'], password=generate_password_hash(payload['password']))
             db.session.add(user)
             db.session.commit()
             schema = UserSchema()
@@ -21,7 +20,9 @@ class UserCRUD:
 
     def read_user(self, id):
         try:
-            user = UserModel.query.get_or_404(id)
+            user = UserModel.query.get(id)
+            if user is None:
+                return 'User not found', 404
             schema = UserSchema()
             return f'User: {schema.dump(user)}'
         except Exception as exc:
@@ -31,6 +32,8 @@ class UserCRUD:
     def read_users(self):
         try:
             users = UserModel.query.all()
+            if users is None:
+                return 'Users not found', 404
             schema = UserSchema(many=True)
             return f'User: {schema.dump(users)}'
         except Exception as exc:
@@ -38,9 +41,21 @@ class UserCRUD:
             return f'Read Error.'
 
     # Implementar
-    def update_user(self, id):
+    def update_user(self, id, payload):
         try:
-            pass
+            user = UserModel.query.get_or_404(id)
+            if 'email' in payload:
+                user.email = payload['email']
+            if 'first_name' in payload:
+                user.first_name = payload['first_name']
+            if 'last_name' in payload:
+                user.last_name = payload['last_name']
+            if 'password' in payload:
+                user.password = generate_password_hash(payload['password'])
+            if 'is_active' in payload:
+                user.is_active = payload['is_active']
+            db.session.commit()
+            return f'User successfully updated'
         except Exception as exc:
             print(f'UserCRUD[UPDATE_USER] Error: {exc}')
             return f'Update Error.'
