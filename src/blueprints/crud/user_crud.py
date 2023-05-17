@@ -8,8 +8,12 @@ class UserCRUD:
 
     def create_user(self, payload: dict):
         try:
-            user = UserModel(email=(payload['email']), first_name=payload['first_name'].capitalize(
-            ), last_name=payload['last_name'].capitalize(), password=generate_password_hash(payload['password']))
+            email = payload['email'].lower()
+            first_name = payload['first_name'].capitalize()
+            last_name = payload['last_name'].capitalize()
+            password = generate_password_hash(payload['password'])
+            user = UserModel(email=email, first_name=first_name,
+                             last_name=last_name, password=password)
             db.session.add(user)
             db.session.commit()
             schema = UserSchema()
@@ -46,11 +50,11 @@ class UserCRUD:
             if user is None:
                 return 'User not found', 404
             if 'email' in payload:
-                user.email = payload['email']
+                user.email = payload['email'].lower()
             if 'first_name' in payload:
-                user.first_name = payload['first_name']
+                user.first_name = payload['first_name'].capitalize()
             if 'last_name' in payload:
-                user.last_name = payload['last_name']
+                user.last_name = payload['last_name'].capitalize()
             if 'password' in payload:
                 user.password = generate_password_hash(payload['password'])
             if 'is_active' in payload:
