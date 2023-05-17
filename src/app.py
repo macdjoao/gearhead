@@ -5,7 +5,7 @@ from src.ext import migration
 from src.ext import admin
 from src.ext import serializer
 from src.ext import auth
-from src.blueprints.endpoints import api
+from src.blueprints.api import endpoints
 
 
 def create_app():
@@ -17,6 +17,6 @@ def create_app():
     migration.init_app(app)
     admin.init_app(app)
     auth.init_app(app)
-    api.init_app(app)
+    endpoints.init_app(app)
 
     return app

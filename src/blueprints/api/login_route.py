@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from src.blueprints.utilities.auth import Auth
 
 login = Blueprint('login', __name__, url_prefix='/api/v1')
