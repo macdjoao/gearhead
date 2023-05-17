@@ -8,8 +8,8 @@ class UserCRUD:
 
     def create_user(self, payload: dict):
         try:
-            user = UserModel(email=payload['email'], first_name=payload['first_name'],
-                             last_name=payload['last_name'], password=generate_password_hash(payload['password']))
+            user = UserModel(email=(payload['email']), first_name=payload['first_name'].capitalize(
+            ), last_name=payload['last_name'].capitalize(), password=generate_password_hash(payload['password']))
             db.session.add(user)
             db.session.commit()
             schema = UserSchema()
