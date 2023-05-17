@@ -1,7 +1,5 @@
 from flask import Blueprint, jsonify, request
 from src.blueprints.utilities.auth import Auth
-from src.blueprints.models.user_model import UserModel
-from werkzeug.security import generate_password_hash, check_password_hash
 
 login = Blueprint('login', __name__, url_prefix='/api/v1')
 
