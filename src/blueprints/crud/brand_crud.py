@@ -54,3 +54,15 @@ class BrandCRUD:
         except Exception as exc:
             print(f'BrandCRUD[UPDATE_BRAND] Error: {exc}')
             return f'Update Error.'
+
+    def delete_brand(self, id: int):
+        try:
+            brand = BrandModel.query.get(id)
+            if brand is None:
+                return 'Brand not found', 404
+            BrandModel.query.filter_by(id=id).delete()
+            db.session.commit()
+            return f'Brand successfully deleted.'
+        except Exception as exc:
+            print(f'BrandCRUD[DELETE_BRAND] Error: {exc}')
+            return f'Delete Error.'
