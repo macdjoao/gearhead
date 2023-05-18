@@ -28,3 +28,14 @@ class BrandCRUD:
         except Exception as exc:
             print(f'BrandCRUD[READ_BRAND] Error: {exc}')
             return f'Read Error.'
+
+    def read_brands(self):
+        try:
+            brands = BrandModel.query.all()
+            if brands is None:
+                return 'Brands not found', 404
+            schema = BrandModel(many=True)
+            return f'Brand: {schema.dump(brands)}'
+        except Exception as exc:
+            print(f'BrandCRUD[READ_BRANDS] Error: {exc}')
+            return f'Read Error.'
