@@ -39,3 +39,18 @@ class BrandCRUD:
         except Exception as exc:
             print(f'BrandCRUD[READ_BRANDS] Error: {exc}')
             return f'Read Error.'
+
+    def update_brand(self, id: int, payload: dict):
+        try:
+            brand = BrandModel.query.get(id)
+            if brand is None:
+                return 'Brand not found', 404
+            if 'name' in payload:
+                brand.name = payload['name'].capitalize()
+            if 'code' in payload:
+                brand.code = payload['code'].upper()
+            db.session.commit()
+            return f'Brand successfully updated'
+        except Exception as exc:
+            print(f'BrandCRUD[UPDATE_BRAND] Error: {exc}')
+            return f'Update Error.'
