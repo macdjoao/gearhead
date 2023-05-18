@@ -7,10 +7,10 @@ from flask_jwt_extended import jwt_required
 schema = UserSchema()
 crud = UserCRUD()
 
-user = Blueprint('user', __name__, url_prefix='/api/v1/user')
+user = Blueprint('user', __name__, url_prefix='/api/v1')
 
 
-@user.route('/create', methods=['POST'])
+@user.route('/user', methods=['POST'])
 @jwt_required()
 def post_user():
     try:
@@ -21,7 +21,7 @@ def post_user():
         return 'Create error.'
 
 
-@user.route('/read/<int:id>')
+@user.route('/user/<int:id>', methods=['GET'])
 @jwt_required()
 def get_user(id: int):
     try:
@@ -31,7 +31,7 @@ def get_user(id: int):
         return 'Read error.'
 
 
-@user.route('/read')
+@user.route('/user', methods=['GET'])
 @jwt_required()
 def get_users():
     try:
@@ -41,7 +41,7 @@ def get_users():
         return 'Read error.'
 
 
-@user.route('/update/<int:id>', methods=['PATCH'])
+@user.route('/user/<int:id>', methods=['PATCH'])
 @jwt_required()
 def patch_user(id: int):
     try:
@@ -52,7 +52,7 @@ def patch_user(id: int):
         return 'Update error.'
 
 
-@user.route('/delete/<int:id>', methods=['DELETE'])
+@user.route('/user/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(id: int):
     try:
