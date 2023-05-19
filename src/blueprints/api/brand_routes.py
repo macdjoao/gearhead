@@ -29,3 +29,13 @@ def get_brand(id: int):
     except Exception as exc:
         print(f'[get_brand] Error: {exc}')
         return 'Read error.'
+
+
+@brand.route('/brand', methods=['GET'])
+# @jwt_required()
+def get_brands():
+    try:
+        return crud.read_brands()
+    except Exception as exc:
+        print(f'[get_brands] Error: {exc}')
+        return 'Read error.'
