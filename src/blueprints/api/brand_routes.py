@@ -50,3 +50,13 @@ def patch_brand(id: int):
     except Exception as exc:
         print(f'[patch_brand] Error: {exc}')
         return 'Update error.'
+
+
+@brand.route('/brand/<int:id>', methods=['DELETE'])
+# @jwt_required()
+def delete_brand(id: int):
+    try:
+        return crud.delete_brand(id)
+    except Exception as exc:
+        print(f'[delete_brand] Error: {exc}')
+        return 'Delete error.'
