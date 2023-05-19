@@ -34,7 +34,7 @@ class BrandCRUD:
             brands = BrandModel.query.all()
             if brands is None:
                 return 'Brands not found', 404
-            schema = BrandModel(many=True)
+            schema = BrandSchema(many=True)
             return f'Brand: {schema.dump(brands)}'
         except Exception as exc:
             print(f'BrandCRUD[READ_BRANDS] Error: {exc}')
