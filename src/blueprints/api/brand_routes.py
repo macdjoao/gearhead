@@ -1,0 +1,21 @@
+from flask import Blueprint
+from flask import request
+from src.blueprints.schemas.brand_schema import BrandSchema
+from src.blueprints.crud.brand_crud import BrandCRUD
+from flask_jwt_extended import jwt_required
+
+schema = BrandSchema()
+crud = BrandCRUD()
+
+brand = Blueprint('brand', __name__, url_prefix='/api/v1')
+
+
+@brand.route('/brand', methods=['POST'])
+# @jwt_required()
+def post_brand():
+    try:
+        brand = schema.load(request.json)
+        return crud.create_brand(brand)
+    except Exception as exc:
+        print(f'[post_brand] Error: {exc}')
+        return 'Create error.'
