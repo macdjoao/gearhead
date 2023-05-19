@@ -8,7 +8,7 @@ class BrandCRUD:
     def create_brand(self, payload: dict):
         try:
             name = payload['name'].capitalize()
-            code = payload['first_name'].upper()
+            code = payload['code'].upper()
             brand = BrandModel(name=name, code=code)
             db.session.add(brand)
             db.session.commit()
