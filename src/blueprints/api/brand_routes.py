@@ -19,3 +19,13 @@ def post_brand():
     except Exception as exc:
         print(f'[post_brand] Error: {exc}')
         return 'Create error.'
+
+
+@brand.route('/brand/<int:id>', methods=['GET'])
+# @jwt_required()
+def get_brand(id: int):
+    try:
+        return crud.read_brand(id)
+    except Exception as exc:
+        print(f'[get_brand] Error: {exc}')
+        return 'Read error.'
