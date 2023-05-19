@@ -39,3 +39,14 @@ def get_brands():
     except Exception as exc:
         print(f'[get_brands] Error: {exc}')
         return 'Read error.'
+
+
+@brand.route('/brand/<int:id>', methods=['PATCH'])
+# @jwt_required()
+def patch_brand(id: int):
+    try:
+        payload = request.json
+        return crud.update_brand(id, payload)
+    except Exception as exc:
+        print(f'[patch_brand] Error: {exc}')
+        return 'Update error.'
