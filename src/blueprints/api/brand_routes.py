@@ -11,7 +11,7 @@ brand = Blueprint('brand', __name__, url_prefix='/api/v1')
 
 
 @brand.route('/brand', methods=['POST'])
-# @jwt_required()
+@jwt_required()
 def post_brand():
     try:
         brand = schema.load(request.json)
@@ -22,7 +22,7 @@ def post_brand():
 
 
 @brand.route('/brand/<int:id>', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def get_brand(id: int):
     try:
         return crud.read_brand(id)
@@ -32,7 +32,7 @@ def get_brand(id: int):
 
 
 @brand.route('/brand', methods=['GET'])
-# @jwt_required()
+@jwt_required()
 def get_brands():
     try:
         return crud.read_brands()
@@ -42,7 +42,7 @@ def get_brands():
 
 
 @brand.route('/brand/<int:id>', methods=['PATCH'])
-# @jwt_required()
+@jwt_required()
 def patch_brand(id: int):
     try:
         payload = request.json
@@ -53,7 +53,7 @@ def patch_brand(id: int):
 
 
 @brand.route('/brand/<int:id>', methods=['DELETE'])
-# @jwt_required()
+@jwt_required()
 def delete_brand(id: int):
     try:
         return crud.delete_brand(id)
