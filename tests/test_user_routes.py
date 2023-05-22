@@ -30,6 +30,8 @@ def test_post_user():
     assert response["first_name"] == first_name
     assert response["last_name"] == last_name
 
+    # TODO: Função para excluir do banco o registro criado para testes
+
 
 def test_post_user_fail():
     response = (requests.request(
