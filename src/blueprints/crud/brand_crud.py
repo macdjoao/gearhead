@@ -13,7 +13,7 @@ class BrandCRUD:
             brand = BrandModel(name=name, code=code)
             db.session.add(brand)
             db.session.commit()
-            return f'Brand successfully created: {schema.dump(brand)}'
+            return schema.dump(brand)
         except Exception as exc:
             print(f'BrandCRUD[CREATE_BRAND] Error: {exc}')
             return f'Create Error.'
@@ -24,7 +24,7 @@ class BrandCRUD:
             brand = BrandModel.query.get(id)
             if brand is None:
                 return 'Brand not found', 404
-            return f'Brand: {schema.dump(brand)}'
+            return schema.dump(brand)
         except Exception as exc:
             print(f'BrandCRUD[READ_BRAND] Error: {exc}')
             return f'Read Error.'
@@ -35,7 +35,7 @@ class BrandCRUD:
             brands = BrandModel.query.all()
             if brands is None:
                 return 'Brands not found', 404
-            return f'Brand: {schema.dump(brands)}'
+            return schema.dump(brands)
         except Exception as exc:
             print(f'BrandCRUD[READ_BRANDS] Error: {exc}')
             return f'Read Error.'

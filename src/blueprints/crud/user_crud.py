@@ -17,7 +17,7 @@ class UserCRUD:
                              last_name=last_name, password=password)
             db.session.add(user)
             db.session.commit()
-            return f'User successfully created: {schema.dump(user)}'
+            return schema.dump(user)
         except Exception as exc:
             print(f'UserCRUD[CREATE_USER] Error: {exc}')
             return f'Create Error.'
@@ -28,7 +28,7 @@ class UserCRUD:
             user = UserModel.query.get(id)
             if user is None:
                 return 'User not found', 404
-            return f'User: {schema.dump(user)}'
+            return schema.dump(user)
         except Exception as exc:
             print(f'UserCRUD[READ_USER] Error: {exc}')
             return f'Read Error.'
@@ -39,7 +39,7 @@ class UserCRUD:
             users = UserModel.query.all()
             if users is None:
                 return 'Users not found', 404
-            return f'User: {schema.dump(users)}'
+            return schema.dump(users)
         except Exception as exc:
             print(f'UserCRUD[READ_USERS] Error: {exc}')
             return f'Read Error.'
