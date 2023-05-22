@@ -32,13 +32,31 @@ def test_post_user():
         'Authorization': f'Bearer {get_token()}',
         'Content-Type': 'application/json'
     }
-
-    print(headers['Authorization'])
-
     response = (requests.request(
         "POST", url, headers=headers, data=payload)).json()
-    print(response)
 
     assert response["email"] == email
     assert response["first_name"] == first_name
     assert response["last_name"] == last_name
+
+
+def test_post_user_fail():
+    email = 'tester@email.com'
+    first_name = fake.first_name()
+    last_name = fake.last_name()
+    password = email
+    url = "http://localhost:5000/api/v1/user"
+    payload = json.dumps({
+        "email": email,
+        "first_name": first_name,
+        "last_name": last_name,
+        "password": password
+    })
+    headers = {
+        'Authorization': f'Bearer {get_token()}',
+        'Content-Type': 'application/json'
+    }
+    response = (requests.request(
+        "POST", url, headers=headers, data=payload)).text
+
+    assert response == 'Create Error.'
