@@ -7,6 +7,7 @@ from src.blueprints.schemas.user_schema import UserSchema
 class UserCRUD:
 
     def create_user(self, payload: dict):
+        schema = UserSchema()
         try:
             email = payload['email'].lower()
             first_name = payload['first_name'].capitalize()
@@ -16,29 +17,28 @@ class UserCRUD:
                              last_name=last_name, password=password)
             db.session.add(user)
             db.session.commit()
-            schema = UserSchema()
             return f'User successfully created: {schema.dump(user)}'
         except Exception as exc:
             print(f'UserCRUD[CREATE_USER] Error: {exc}')
             return f'Create Error.'
 
     def read_user(self, id: int):
+        schema = UserSchema()
         try:
             user = UserModel.query.get(id)
             if user is None:
                 return 'User not found', 404
-            schema = UserSchema()
             return f'User: {schema.dump(user)}'
         except Exception as exc:
             print(f'UserCRUD[READ_USER] Error: {exc}')
             return f'Read Error.'
 
     def read_users(self):
+        schema = UserSchema(many=True)
         try:
             users = UserModel.query.all()
             if users is None:
                 return 'Users not found', 404
-            schema = UserSchema(many=True)
             return f'User: {schema.dump(users)}'
         except Exception as exc:
             print(f'UserCRUD[READ_USERS] Error: {exc}')
