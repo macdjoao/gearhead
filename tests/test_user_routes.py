@@ -1,4 +1,4 @@
-from tests.utilities import get_token
+from tests.utilities import generate_headers
 from faker import Faker
 import requests
 import json
@@ -16,15 +16,11 @@ payload = json.dumps({
     "last_name": last_name,
     "password": password
 })
-headers = {
-    'Authorization': f'Bearer {get_token()}',
-    'Content-Type': 'application/json'
-}
 
 
 def test_post_user():
     response = (requests.request(
-        "POST", url, headers=headers, data=payload)).json()
+        "POST", url, headers=generate_headers(), data=payload)).json()
 
     assert response["email"] == email
     assert response["first_name"] == first_name
@@ -35,7 +31,7 @@ def test_post_user():
 
 def test_post_user_fail():
     response = (requests.request(
-        "POST", url, headers=headers, data=payload)).text
+        "POST", url, headers=generate_headers(), data=payload)).text
 
     # Deve falhar pois o email (criado em test_post_user) já existe
     assert response == 'Create Error.'
