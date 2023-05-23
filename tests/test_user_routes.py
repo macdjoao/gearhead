@@ -1,4 +1,4 @@
-from tests.utilities import generate_headers
+from tests.utilities import generate_headers, clear_bd
 from faker import Faker
 import requests
 import json
@@ -26,12 +26,12 @@ def test_post_user():
     assert response["first_name"] == first_name
     assert response["last_name"] == last_name
 
-    # TODO: Função para excluir do banco o registro criado para testes
+    clear_bd(url=url, id=response["id"])
 
 
-def test_post_user_fail():
-    response = (requests.request(
-        "POST", url, headers=generate_headers(), data=payload)).text
+# def test_post_user_fail():
+#     response = (requests.request(
+#         "POST", url, headers=generate_headers(), data=payload)).text
 
-    # Deve falhar pois o email (criado em test_post_user) já existe
-    assert response == 'Create Error.'
+#     # Deve falhar pois o email (criado em test_post_user) já existe
+#     assert response == 'Create Error.'
