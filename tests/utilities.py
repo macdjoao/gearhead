@@ -16,3 +16,8 @@ def generate_headers():
     headers = {'Authorization': f'Bearer {get_token()}',
                'Content-Type': 'application/json'}
     return headers
+
+
+def clear_bd(url, id):
+    requests.request(
+        "DELETE", f'{url}/{id}', headers=generate_headers())
