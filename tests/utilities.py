@@ -10,3 +10,9 @@ def get_token():
     response = (requests.request(
         "POST", url, headers=headers, data=payload)).json()
     return response['access_token']
+
+
+def generate_headers():
+    headers = {'Authorization': f'Bearer {get_token()}',
+               'Content-Type': 'application/json'}
+    return headers
