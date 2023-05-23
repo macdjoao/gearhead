@@ -18,6 +18,6 @@ def generate_headers():
     return headers
 
 
-def clear_bd(url, id):
+def clear_db(url, id):
     requests.request(
         "DELETE", f'{url}/{id}', headers=generate_headers())

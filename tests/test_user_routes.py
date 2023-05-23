@@ -1,4 +1,4 @@
-from tests.utilities import generate_headers, clear_bd
+from tests.utilities import generate_headers, clear_db
 from faker import Faker
 import requests
 import json
@@ -26,7 +26,7 @@ def test_post_user():
     assert response["first_name"] == first_name
     assert response["last_name"] == last_name
 
-    clear_bd(url=url, id=response["id"])
+    clear_db(url=url, id=response["id"])
 
 
 # def test_post_user_fail():
