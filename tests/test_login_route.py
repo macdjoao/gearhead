@@ -10,6 +10,7 @@ def test_login():
                          "password": "johndoe_password"})
     response = (requests.request(
         "POST", url, headers=headers, data=payload)).json()
+
     assert 'access_token' in response
 
 
@@ -17,4 +18,5 @@ def test_login_fail():
     payload = json.dumps({"email": "wrong_mail@email.com",
                          "password": "wrong_password"})
     response = requests.request("POST", url, headers=headers, data=payload)
+
     assert response.text == 'Incorrect email or password.'
