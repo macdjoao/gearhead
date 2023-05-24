@@ -29,9 +29,10 @@ def test_post_user():
     clear_db(url=url, id=response["id"])
 
 
+# TODO
 # def test_post_user_fail():
 #     response = (requests.request(
-#         "POST", url, headers=generate_headers(), data=payload)).text
+#         "POST", url, headers=generate_headers(), data=payload)).json()
 
-#     # Deve falhar pois o email (criado em test_post_user) já existe
+#     Deve falhar pois o email (criado em test_post_user) já existe
 #     assert response == 'Create Error.'
