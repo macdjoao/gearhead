@@ -30,9 +30,26 @@ def test_post_user():
 
     clear_db(url=url, id=response["id"])
 
-# def test_post_user_fail():
-#     response = (requests.request(
-#         "POST", url, headers=generate_headers(), data=payload)).json()
 
-#     # Deve falhar pois o email (criado em test_post_user) já existe
-#     assert response == 'Create Error.'
+def test_post_user_fail():
+    email = fake.safe_email()
+    first_name = fake.first_name()
+    last_name = fake.last_name()
+    password = email
+    payload = json.dumps({
+        "email": email,
+        "first_name": first_name,
+        "last_name": last_name,
+        "password": password
+    })
+
+    new_user = requests.request(
+        "POST", url, headers=generate_headers(), data=payload).json()
+
+    # Attempting to create a new record using the same email used in new_user (must fail)
+    response = (requests.request(
+        "POST", url, headers=generate_headers(), data=payload)).text
+
+    assert response == 'Create Error.'
+
+    clear_db(url=url, id=new_user["id"])
